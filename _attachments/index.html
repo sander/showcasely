@@ -1,0 +1,53 @@
+<!doctype html>
+<meta charset=utf-8>
+
+<title>Editor</title>
+<link rel=stylesheet href='style/main.css'>
+<link rel=stylesheet href='//fonts.googleapis.com/css?family=Inconsolata'>
+
+<div id="account"></div>
+
+<h1>Editor</h1>
+
+<div id=pages></div>
+
+<div id=editor></div>
+
+<script src="vendor/couchapp/loader.js"></script>
+<script src='ace/ace.js'></script>
+<script src='ace/mode-javascript.js'></script>
+<script src='ace/mode-html.js'></script>
+<script type="text/javascript" charset="utf-8">
+  var db = $.couch.db('showcase');
+
+  $.couch.app(function(app) {
+    $("#account").evently("account", app);
+    $('#pages').evently('pages', app);
+    $('#editor').evently('editor', app);
+    $.evently.connect('#pages', '#editor', ['edit']);
+  });
+
+//  var currentDoc = null;
+
+/*
+  $('#save').click(function() {
+    $('#save').attr('disabled', 'disabled');
+    $('#status').text('Saving…');
+
+    if (!currentDoc)
+      return;
+
+    var doc = JSON.parse(editors.extra.getSession().getValue());
+    doc._id = currentDoc._id;
+    doc._rev = currentDoc._rev;
+    doc._attachments = currentDoc._attachments;
+    doc.content = editors.main.getSession().getValue();
+
+    db.saveDoc(doc, {success: function(response) {
+      currentDoc._rev = response.rev;
+      $('#save').removeAttr('disabled');
+      $('#status').text('Saved');
+    }});
+  });
+  */
+</script>
